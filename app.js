@@ -6,17 +6,16 @@
   const status = document.getElementById("form-status");
   const button = document.getElementById("send-button");
   const hint = document.getElementById("send-hint");
-  const emailTo = "ilsellinospiritato@gmail.com";
   const isSheet = config.delivery === "sheet";
   const endpointOK = /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(config.endpoint || "");
   if (isSheet && endpointOK) {
     button.innerHTML = 'Invia la manifestazione di interesse <span aria-hidden="true">↗</span>';
-    hint.textContent = "Si aprirà una nuova scheda con la conferma dell'invio. I dati non saranno pubblicati sul sito.";
+    hint.textContent = "Premendo Invia, il modulo trasmette automaticamente la risposta all'archivio privato. La conferma della registrazione comparirà nella nuova scheda.";
   } else if (isSheet) {
     button.disabled = true;
     button.textContent = "Raccolta temporaneamente non disponibile";
-    hint.textContent = "Il modulo non è ancora collegato all'archivio riservato: nessun dato può essere inviato.";
-    status.textContent = "Configurazione incompleta. Contatta l'associazione via email.";
+    hint.textContent = "L'invio automatico sarà disponibile dopo il collegamento all'archivio privato dell'associazione.";
+    status.textContent = "Raccolta delle risposte non ancora attiva. Nessun dato è stato trasmesso.";
   }
   function get(name) {
     return String(new FormData(form).get(name) || "").trim();
@@ -55,23 +54,6 @@
       HTMLFormElement.prototype.submit.call(form);
       return;
     }
-    const body = [
-      "Bike to School – Via Verdi | Manifestazione di interesse",
-      "",
-      "Genitore: " + get("genitore"),
-      "Età bambino/a (senza nomi): " + ages.value.trim(),
-      "Via o zona di partenza (senza civico): " + from,
-      "Orario di ingresso: " + get("ingresso"),
-      "Modalità di partecipazione: " + get("modalita"),
-      "Recapito del genitore: " + get("contatto"),
-      "Note logistiche: " + (get("note") || "Nessuna"),
-      "",
-      "Confermo di avere letto l'informativa privacy e di acconsentire al trattamento per le finalità organizzative indicate.",
-      "Ho compreso che ogni bambino/a deve essere accompagnato da un genitore che pedala con la propria bicicletta.",
-      "Questa è soltanto una manifestazione di interesse, senza impegno a partecipare."
-    ].join("\n");
-    const subject = "Bike to School Via Verdi – manifestazione di interesse";
-    status.textContent = "Si aprirà il programma di posta. Verifica l'email precompilata e premi Invia: il modulo da solo non spedisce nulla.";
-    window.location.href = "mailto:" + emailTo + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    status.textContent = "L'invio automatico non è ancora disponibile: nessun dato è stato trasmesso.";
   });
 })();
