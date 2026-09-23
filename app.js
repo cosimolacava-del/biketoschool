@@ -33,11 +33,8 @@
       return;
     }
     const from = get("partenza");
-    if (/\d/.test(from)) {
-      status.textContent = "Nella via di partenza non inserire il numero civico: indica soltanto la via o il quartiere.";
-      document.getElementById("partenza").focus();
-      return;
-    }
+    // Non escludere i numeri nel nome della via (es. «Via 4 Novembre»).
+    // Il modulo chiede esplicitamente di non inserire numeri civici.
     if (isSheet) {
       if (!endpointOK) {
         status.textContent = "L'archivio riservato non è ancora collegato: nessun dato è stato inviato.";
