@@ -1,7 +1,8 @@
-// Modalità iniziale: il modulo prepara un'email nel programma di posta del genitore.
-// Per raccogliere automaticamente in un Google Sheet privato:
-// 1. segui README.md; 2. sostituisci delivery con "sheet"; 3. inserisci l'URL /exec.
+// Raccolta AUTOMATICA delle manifestazioni di interesse.
+// Per attivarla: segui README.md e incolla l'URL /exec del deployment
+// Google Apps Script collegato al foglio PRIVATO dell'associazione.
+// Nessuna risposta viene inviata o salvata se l'endpoint non è configurato.
 window.BIKE_TO_SCHOOL = Object.freeze({
-  delivery: "email", // "email" oppure "sheet"
+  delivery: "sheet",
   endpoint: ""
 });
