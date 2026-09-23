@@ -9,6 +9,7 @@
   const isSheet = config.delivery === "sheet";
   const endpointOK = /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(config.endpoint || "");
   if (isSheet && endpointOK) {
+    button.disabled = false;
     button.innerHTML = 'Invia la manifestazione di interesse <span aria-hidden="true">↗</span>';
     hint.textContent = "Premendo Invia, il modulo trasmette automaticamente la risposta all'archivio privato. La conferma della registrazione comparirà nella nuova scheda.";
   } else if (isSheet) {
